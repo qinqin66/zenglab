@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+#PBS -N test
+#PBS -l nodes=1:ppn=48
+#PBS -e $PBS_JOBID
+#PBS -o $PBS_JOBID
+#PBS -q workq
+#PBS -m ae
+#PBS -M XXX@mail.sustech.edu.cn
+#PBS -l walltime=144:00:00
+cd $PBS_O_WORKDIR
+source ~/env_wrf45.sh
+NP=`cat $PBS_NODEFILE|wc -l`
+mpirun -np $NP ./wrf.exe
+
